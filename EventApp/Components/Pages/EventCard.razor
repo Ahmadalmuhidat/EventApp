@@ -1,0 +1,37 @@
+﻿@using EventApp
+
+<div class="card shadow mb-3">
+
+    <div class="card-body">
+
+        <h4 class="card-title">
+            @Event.Name
+        </h4>
+
+
+        <p>
+            📅 @Event.Date.ToShortDateString()
+        </p>
+
+
+        <p>
+            📍 @Event.Location
+        </p>
+
+
+        <a class="btn btn-primary"
+           href="/events/@Event.Id">
+            View Details
+        </a>
+
+    </div>
+
+</div>
+
+
+@code {
+
+    [Parameter]
+    public EventModel Event { get; set; } = new();
+
+}

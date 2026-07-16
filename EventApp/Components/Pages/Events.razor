@@ -1,0 +1,23 @@
+﻿@page "/events"
+
+@using EventApp
+@using EventApp
+
+
+<h3>
+    Upcoming Events
+</h3>
+
+
+@foreach (var item in events)
+{
+    <EventCard Event="item" />
+}
+
+
+
+@code {
+
+    private List<EventModel> events = EventData.Events;
+
+}

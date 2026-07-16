@@ -1,0 +1,96 @@
+﻿@page "/register/{id:int}"
+
+@rendermode InteractiveServer
+
+@using EventApp
+@using Microsoft.EntityFrameworkCore
+
+@inject AppDbContext Db
+
+<h3>Event Registration</h3>
+
+
+@if (eventItem == null)
+{
+    <p>Loading event...</p>
+}
+else
+{
+    <h4>@eventItem.Name</h4>
+
+    <p>
+        Date: @eventItem.Date.ToShortDateString()
+    </p>
+
+    <p>
+        Location: @eventItem.Location
+    </p>
+
+
+    <hr />
+
+
+    <EditForm Model="registration" OnValidSubmit="Submit">
+
+        <div class="mb-3">
+
+            <label>Name</label>
+
+            <InputText class="form-control"
+                       @bind-Value="registration.Name" />
+
+        </div>
+
+
+        <div class="mb-3">
+
+            <label>Email</label>
+
+            <InputText class="form-control"
+                       @bind-Value="registration.Email" />
+
+        </div>
+
+
+        <button class="btn btn-primary">
+            Register
+        </button>
+
+    </EditForm>
+}
+
+
+
+@code {
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    private EventModel? eventItem;
+
+
+    private RegistrationModel registration = new();
+
+
+    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    {
+        eventItem = await Db.Events
+            .FirstOrDefaultAsync(e => e.Id == id);
+    }
+
+
+    private void Submit()
+    {
+        Console.WriteLine("Registered");
+    }
+
+
+    public class RegistrationModel
+    {
+        public string Name { get; set; } = "";
+
+        public string Email { get; set; } = "";
+    }
+
+}
