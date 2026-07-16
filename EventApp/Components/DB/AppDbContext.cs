@@ -11,6 +11,8 @@ public class AppDbContext : DbContext
     {
     }
 
+    public DbSet<Attendance> Attendances { get; set; }
+
 
     public DbSet<EventModel> Events { get; set; }
 }

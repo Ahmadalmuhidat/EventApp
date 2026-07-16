@@ -9,6 +9,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=EventEase.db"));
+builder.Services.AddScoped<EventStateService>();
 
 var app = builder.Build();
 
